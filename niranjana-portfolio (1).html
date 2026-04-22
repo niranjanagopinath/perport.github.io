@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Niranjana Gopinath — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --bg: #0d0608;
+  --bg2: #130a0e;
+  --surface: #1a0d12;
+  --border: #3d1a28;
+  --pink: #ff4d8d;
+  --pink2: #ff85b3;
+  --pink3: #ffc2d9;
+  --rose: #ff1f6b;
+  --blush: #ffb3ce;
+  --gold: #ffd4a8;
+  --text: #f5d5e0;
+  --muted: #8a5566;
+  --glow: 0 0 24px rgba(255,77,141,0.4);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;cursor:none;overflow-x:hidden}
+#cursor{position:fixed;width:10px;height:10px;background:var(--pink);border-radius:50% 0 50% 0;transform:rotate(45deg);pointer-events:none;z-index:9999;mix-blend-mode:screen;box-shadow:0 0 14px var(--pink),0 0 30px rgba(255,77,141,0.5);transition:transform 0.12s}
+#cursor-ring{position:fixed;width:34px;height:34px;border:1px solid rgba(255,77,141,0.35);border-radius:50%;pointer-events:none;z-index:9998;transition:all 0.2s ease}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;z-index:1000;opacity:0.6}
+body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(255,77,141,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,77,141,0.025) 1px,transparent 1px);background-size:50px 50px;pointer-events:none;z-index:0}
+.scanline{position:fixed;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,133,179,0.2),transparent);pointer-events:none;z-index:999;animation:scanMove 8s linear infinite}
+@keyframes scanMove{from{top:-2px}to{top:100vh}}
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:1.2rem 3rem;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(180deg,rgba(13,6,8,0.97) 0%,transparent 100%);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,77,141,0.08)}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.3rem;color:var(--pink2);letter-spacing:0.05em;text-decoration:none;display:flex;align-items:center;gap:0.4rem}
+.nav-logo-petal{font-size:1rem;animation:spinSlow 8s linear infinite;display:inline-block}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;font-family:'Space Mono',monospace;transition:color 0.2s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:var(--pink);transform:scaleX(0);transition:transform 0.25s}
+.nav-links a:hover{color:var(--pink2)}.nav-links a:hover::after{transform:scaleX(1)}
+section{position:relative;z-index:1}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:0 6vw;padding-top:80px;overflow:hidden}
+.hero-floral-bg{position:absolute;right:-80px;top:50%;transform:translateY(-55%);width:620px;height:620px;opacity:0.12;pointer-events:none;animation:floatSlow 10s ease-in-out infinite}
+.hero-tag{font-family:'Space Mono',monospace;font-size:0.65rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--pink2);margin-bottom:1.6rem;opacity:0;animation:fadeUp 0.8s 0.3s forwards}
+.hero-tag::before{content:'✿ ';color:var(--rose)}
+.hero-name{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(4rem,11vw,10rem);line-height:0.9;letter-spacing:-0.02em;margin-bottom:1.6rem;opacity:0;animation:fadeUp 0.9s 0.5s forwards}
+.hero-name .line1{display:block;color:var(--text)}
+.hero-name .line2{display:block;color:var(--pink);-webkit-text-stroke:2px var(--pink);-webkit-text-fill-color:transparent;font-style:italic}
+.hero-subtitle{font-size:0.82rem;color:var(--muted);line-height:1.9;max-width:460px;margin-bottom:3rem;font-family:'Space Mono',monospace;opacity:0;animation:fadeUp 0.9s 0.7s forwards}
+.hero-cta{display:flex;gap:1.2rem;flex-wrap:wrap;opacity:0;animation:fadeUp 0.9s 0.9s forwards}
+.btn{display:inline-flex;align-items:center;gap:0.5rem;padding:0.75rem 2rem;font-family:'Space Mono',monospace;font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;border:1px solid;transition:all 0.28s;position:relative;overflow:hidden}
+.btn::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.07),transparent);transform:translateX(-100%);transition:transform 0.5s}
+.btn:hover::after{transform:translateX(100%)}
+.btn-primary{color:var(--bg);background:var(--pink);border-color:var(--pink);box-shadow:var(--glow)}
+.btn-primary:hover{box-shadow:0 0 40px rgba(255,77,141,0.7);transform:translateY(-2px)}
+.btn-outline{color:var(--pink2);border-color:var(--border)}
+.btn-outline:hover{border-color:var(--pink);box-shadow:var(--glow);transform:translateY(-2px)}
+.hero-scroll{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:0.6rem;color:var(--muted);font-size:0.55rem;letter-spacing:0.25em;text-transform:uppercase;font-family:'Space Mono',monospace;opacity:0;animation:fadeUp 1s 1.2s forwards}
+.scroll-petal{font-size:1rem;animation:floatBob 2s ease-in-out infinite}
+.scroll-line{width:1px;height:40px;background:linear-gradient(180deg,var(--pink),transparent)}
+.typewriter{display:inline;border-right:2px solid var(--pink);animation:blink 0.9s step-end infinite}
+
+/* ABOUT */
+#about{padding:9rem 6vw;display:grid;grid-template-columns:1fr 1fr;gap:7rem;align-items:center}
+.section-label{font-family:'Space Mono',monospace;font-size:0.6rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--rose);margin-bottom:0.8rem;display:flex;align-items:center;gap:0.6rem}
+.section-label::before{content:'';display:block;width:20px;height:1px;background:var(--rose)}
+.section-title{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(2.2rem,5vw,4.2rem);line-height:1.05;letter-spacing:-0.01em;margin-bottom:2rem}
+.section-title em{color:var(--pink);font-style:italic}
+.about-text{color:var(--muted);font-size:0.82rem;line-height:1.95;margin-bottom:1.2rem}
+.about-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:2.5rem}
+.stat-box{border:1px solid var(--border);padding:1.5rem 1rem;text-align:center;position:relative;overflow:hidden;transition:border-color 0.3s,transform 0.3s;background:var(--surface)}
+.stat-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--pink),var(--rose));transform:scaleX(0);transition:transform 0.35s}
+.stat-box:hover{border-color:var(--pink);transform:translateY(-4px)}.stat-box:hover::before{transform:scaleX(1)}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:600;color:var(--pink);display:block;line-height:1}
+.stat-label{font-family:'Space Mono',monospace;font-size:0.55rem;color:var(--muted);letter-spacing:0.12em;text-transform:uppercase;margin-top:0.4rem}
+.terminal{background:rgba(0,0,0,0.6);border:1px solid var(--border);padding:1.5rem;font-size:0.7rem;font-family:'Space Mono',monospace;color:var(--pink3);position:relative;margin-top:2rem;box-shadow:inset 0 0 40px rgba(255,77,141,0.04)}
+.terminal::before{content:'TERMINAL';position:absolute;top:-0.6rem;left:1.5rem;background:var(--bg);padding:0 0.5rem;font-size:0.5rem;letter-spacing:0.25em;color:var(--muted)}
+.terminal-bar{display:flex;gap:6px;margin-bottom:1rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
+.t-dot{width:9px;height:9px;border-radius:50%}
+.t-dot:nth-child(1){background:var(--rose)}.t-dot:nth-child(2){background:var(--gold)}.t-dot:nth-child(3){background:var(--pink3)}
+.t-line{display:block;line-height:2}.t-line .prompt{color:var(--pink)}.t-line .dim{color:var(--muted)}
+.about-visual{position:relative;display:flex;align-items:center;justify-content:center}
+.avatar-wrap{width:300px;height:360px;border:1px solid var(--border);background:var(--surface);position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 0 80px rgba(255,77,141,0.06)}
+.avatar-wrap::after{content:'';position:absolute;top:20px;left:20px;right:-20px;bottom:-20px;border:1px solid var(--pink);opacity:0.3;pointer-events:none}
+.avatar-circuit{position:absolute;inset:0;opacity:0.15}
+.avatar-monogram{font-family:'Cormorant Garamond',serif;font-size:6rem;font-weight:300;font-style:italic;color:var(--pink);opacity:0.25;letter-spacing:-0.05em;position:relative;z-index:1}
+.avatar-tag{position:absolute;bottom:1.2rem;left:1.2rem;font-family:'Space Mono',monospace;font-size:0.55rem;color:var(--muted);letter-spacing:0.12em}
+.float-chip{position:absolute;background:var(--surface);border:1px solid var(--border);padding:0.6rem 1.1rem;font-family:'Space Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;color:var(--pink2);display:flex;align-items:center;gap:0.5rem}
+.float-chip::before{content:'✿';color:var(--rose)}
+.chip-1{top:8%;right:-12%;animation:floatBob 4s ease-in-out infinite}
+.chip-2{bottom:12%;left:-18%;animation:floatBob 4s ease-in-out 1.8s infinite}
+
+/* SKILLS */
+#skills{padding:8rem 6vw;background:linear-gradient(180deg,transparent,rgba(255,77,141,0.02),transparent)}
+.skills-header{margin-bottom:4.5rem}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1.5rem}
+.skill-card{background:var(--surface);border:1px solid var(--border);padding:2rem;position:relative;overflow:hidden;transition:all 0.35s}
+.skill-card::before{content:'';position:absolute;top:-20px;right:-20px;width:80px;height:80px;background:radial-gradient(circle,rgba(255,77,141,0.12) 0%,transparent 70%);border-radius:50%;transition:transform 0.4s}
+.skill-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--pink),var(--rose));transform:scaleX(0);transform-origin:left;transition:transform 0.4s}
+.skill-card:hover{border-color:rgba(255,77,141,0.5);transform:translateY(-5px);box-shadow:0 16px 50px rgba(255,77,141,0.08)}
+.skill-card:hover::before{transform:scale(2.5)}.skill-card:hover::after{transform:scaleX(1)}
+.skill-flower{font-size:1.4rem;margin-bottom:1rem;display:block}
+.skill-cat{font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--rose);margin-bottom:0.5rem}
+.skill-name{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;margin-bottom:1.2rem;color:var(--text)}
+.skill-tags{display:flex;flex-wrap:wrap;gap:0.45rem}
+.tag{padding:0.28rem 0.7rem;font-family:'Space Mono',monospace;font-size:0.6rem;letter-spacing:0.06em;border:1px solid var(--border);color:var(--muted);transition:all 0.2s}
+.skill-card:hover .tag{border-color:rgba(255,77,141,0.3);color:var(--pink3)}
+.skill-level{margin-top:1.2rem;height:1px;background:var(--border)}
+.skill-level-fill{height:100%;background:linear-gradient(90deg,var(--pink),var(--rose));width:0%;transition:width 1.4s ease 0.2s}
+
+/* PROJECTS */
+#projects{padding:8rem 6vw}
+.projects-header{margin-bottom:4.5rem}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:2rem}
+.project-card{border:1px solid var(--border);background:var(--surface);overflow:hidden;transition:all 0.35s;display:flex;flex-direction:column;position:relative}
+.project-card::before{content:'';position:absolute;top:0;right:0;width:120px;height:120px;background:radial-gradient(circle at top right,rgba(255,77,141,0.07) 0%,transparent 70%);pointer-events:none}
+.project-card:hover{border-color:rgba(255,77,141,0.45);transform:translateY(-6px);box-shadow:0 24px 60px rgba(255,77,141,0.09)}
+.project-header{padding:2rem 2rem 1.5rem;border-bottom:1px solid var(--border);position:relative}
+.project-num{position:absolute;top:1.5rem;right:1.5rem;font-family:'Cormorant Garamond',serif;font-size:3.5rem;font-weight:300;font-style:italic;color:rgba(255,77,141,0.08);line-height:1;user-select:none}
+.project-icon-wrap{width:42px;height:42px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:1.2rem;transition:border-color 0.3s}
+.project-card:hover .project-icon-wrap{border-color:var(--pink)}
+.project-title{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;line-height:1.3}
+.project-body{padding:1.5rem 2rem 2rem;flex:1;display:flex;flex-direction:column}
+.project-desc{color:var(--muted);font-size:0.78rem;line-height:1.9;flex:1;margin-bottom:1.5rem}
+.project-stack{display:flex;flex-wrap:wrap;gap:0.4rem}
+.stack-tag{padding:0.22rem 0.6rem;font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:0.06em;background:rgba(255,77,141,0.07);color:var(--pink2);border:1px solid rgba(255,77,141,0.2)}
+
+/* ACHIEVEMENT */
+#achievement{padding:8rem 6vw;background:var(--bg2)}
+.achievement-inner{border:1px solid var(--border);padding:4.5rem;position:relative;overflow:hidden;display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:center;background:var(--surface)}
+.achievement-inner::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--pink),var(--rose),var(--blush))}
+.ach-floral-bg{position:absolute;right:-60px;bottom:-60px;width:350px;height:350px;opacity:0.07;pointer-events:none;animation:spinSlow 30s linear infinite}
+.achievement-label{font-family:'Space Mono',monospace;font-size:0.6rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--rose);margin-bottom:1rem;display:flex;align-items:center;gap:0.6rem}
+.achievement-label::before{content:'✿'}
+.achievement-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4.5vw,3.5rem);font-weight:600;line-height:1.05;margin-bottom:1.5rem}
+.achievement-title em{color:var(--pink);font-style:italic}
+.achievement-desc{color:var(--muted);font-size:0.78rem;line-height:1.95;max-width:580px}
+.achievement-badges{display:flex;flex-direction:column;gap:1rem;min-width:160px}
+.ach-badge{border:1px solid var(--border);padding:1.2rem;text-align:center;background:var(--bg);position:relative;overflow:hidden}
+.ach-badge::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,var(--pink),var(--rose))}
+.ach-badge-num{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:600;display:block;line-height:1;color:var(--pink)}
+.ach-badge-label{font-family:'Space Mono',monospace;font-size:0.55rem;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-top:0.3rem}
+
+/* CONTACT */
+#contact{padding:9rem 6vw;text-align:center;position:relative;overflow:hidden}
+.contact-floral{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:700px;height:500px;opacity:0.04;pointer-events:none}
+.contact-heading{font-family:'Cormorant Garamond',serif;font-size:clamp(3.5rem,9vw,8rem);font-weight:600;line-height:0.95;letter-spacing:-0.02em;margin-bottom:1.5rem}
+.contact-heading span{color:var(--pink);font-style:italic;-webkit-text-stroke:1.5px var(--pink);-webkit-text-fill-color:transparent}
+.contact-sub{color:var(--muted);font-size:0.8rem;max-width:380px;margin:0 auto 3rem;line-height:1.9;font-family:'Space Mono',monospace}
+.contact-links{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-bottom:4rem}
+.contact-link{display:flex;align-items:center;gap:0.6rem;color:var(--muted);text-decoration:none;font-family:'Space Mono',monospace;font-size:0.66rem;letter-spacing:0.1em;border:1px solid var(--border);padding:0.75rem 1.3rem;transition:all 0.25s;background:var(--surface)}
+.contact-link:hover{color:var(--pink2);border-color:var(--pink);box-shadow:var(--glow);transform:translateY(-2px)}
+.contact-link svg{width:14px;height:14px;fill:currentColor}
+footer{padding:2rem 6vw;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-family:'Space Mono',monospace;font-size:0.6rem;letter-spacing:0.1em}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.9s ease,transform 0.9s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* KEYFRAMES */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes blink{0%,100%{border-color:var(--pink)}50%{border-color:transparent}}
+@keyframes floatBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes floatSlow{0%,100%{transform:translateY(-55%) rotate(-2deg)}50%{transform:translateY(-57%) rotate(2deg)}}
+@keyframes spinSlow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes petalFall{0%{transform:translateY(-20px) rotate(0deg);opacity:0}10%{opacity:1}90%{opacity:0.5}100%{transform:translateY(100vh) rotate(720deg);opacity:0}}
+
+.petal-particle{position:fixed;pointer-events:none;z-index:2;font-size:0.8rem;animation:petalFall linear infinite;opacity:0}
+
+@media(max-width:768px){
+  nav{padding:1rem 1.5rem}.nav-links{display:none}
+  #about{grid-template-columns:1fr;gap:3rem;padding:5rem 5vw}.about-visual{display:none}
+  #skills,#projects,#achievement,#contact{padding:5rem 5vw}
+  .achievement-inner{grid-template-columns:1fr;padding:2.5rem}
+  .achievement-badges{flex-direction:row}
+}
+</style>
+</head>
+<body>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<div class="scanline"></div>
+
+<nav>
+  <a href="#hero" class="nav-logo">
+    <span class="nav-logo-petal">✿</span>Niranjana
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#achievement">Award</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <svg class="hero-floral-bg" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g stroke="#ff4d8d" stroke-width="0.8" opacity="0.9">
+      <line x1="300" y1="300" x2="300" y2="80"/><line x1="300" y1="80" x2="270" y2="50"/><line x1="300" y1="80" x2="330" y2="50"/>
+      <rect x="255" y="35" width="30" height="15" rx="2"/>
+      <line x1="300" y1="300" x2="500" y2="180"/><line x1="500" y1="180" x2="540" y2="150"/><line x1="500" y1="180" x2="520" y2="220"/>
+      <circle cx="550" cy="140" r="10"/>
+      <line x1="300" y1="300" x2="520" y2="380"/><line x1="520" y1="380" x2="560" y2="360"/><line x1="520" y1="380" x2="550" y2="420"/>
+      <rect x="555" y="348" width="20" height="20" rx="3"/>
+      <line x1="300" y1="300" x2="300" y2="520"/><line x1="300" y1="520" x2="270" y2="550"/><line x1="300" y1="520" x2="330" y2="550"/>
+      <circle cx="300" cy="568" r="12"/>
+      <line x1="300" y1="300" x2="80" y2="380"/><line x1="80" y1="380" x2="40" y2="400"/><line x1="80" y1="380" x2="50" y2="340"/>
+      <rect x="20" y="388" width="20" height="20" rx="3"/>
+      <line x1="300" y1="300" x2="100" y2="180"/><line x1="100" y1="180" x2="60" y2="150"/><line x1="100" y1="180" x2="80" y2="220"/>
+      <circle cx="50" cy="140" r="10"/>
+    </g>
+    <g fill="none" stroke="#ff4d8d" stroke-width="0.7" opacity="0.7">
+      <ellipse cx="300" cy="190" rx="28" ry="55" transform="rotate(0 300 300)"/>
+      <ellipse cx="300" cy="190" rx="28" ry="55" transform="rotate(60 300 300)"/>
+      <ellipse cx="300" cy="190" rx="28" ry="55" transform="rotate(120 300 300)"/>
+      <ellipse cx="300" cy="190" rx="28" ry="55" transform="rotate(180 300 300)"/>
+      <ellipse cx="300" cy="190" rx="28" ry="55" transform="rotate(240 300 300)"/>
+      <ellipse cx="300" cy="190" rx="28" ry="55" transform="rotate(300 300 300)"/>
+    </g>
+    <g fill="none" stroke="#ff85b3" stroke-width="0.9" opacity="0.8">
+      <ellipse cx="300" cy="240" rx="16" ry="35" transform="rotate(0 300 300)"/>
+      <ellipse cx="300" cy="240" rx="16" ry="35" transform="rotate(45 300 300)"/>
+      <ellipse cx="300" cy="240" rx="16" ry="35" transform="rotate(90 300 300)"/>
+      <ellipse cx="300" cy="240" rx="16" ry="35" transform="rotate(135 300 300)"/>
+      <ellipse cx="300" cy="240" rx="16" ry="35" transform="rotate(180 300 300)"/>
+      <ellipse cx="300" cy="240" rx="16" ry="35" transform="rotate(225 300 300)"/>
+      <ellipse cx="300" cy="240" rx="16" ry="35" transform="rotate(270 300 300)"/>
+      <ellipse cx="300" cy="240" rx="16" ry="35" transform="rotate(315 300 300)"/>
+    </g>
+    <circle cx="300" cy="300" r="30" stroke="#ff4d8d" stroke-width="1" fill="none"/>
+    <circle cx="300" cy="300" r="18" stroke="#ff85b3" stroke-width="0.8" fill="none"/>
+    <circle cx="300" cy="300" r="6" fill="#ff4d8d" opacity="0.6"/>
+    <g stroke="#ff4d8d" stroke-width="0.8" opacity="0.5">
+      <line x1="270" y1="300" x2="280" y2="300"/><line x1="320" y1="300" x2="330" y2="300"/>
+      <line x1="300" y1="270" x2="300" y2="280"/><line x1="300" y1="320" x2="300" y2="330"/>
+    </g>
+    <circle cx="300" cy="300" r="120" stroke="#ff4d8d" stroke-width="0.5" stroke-dasharray="4 8" fill="none" opacity="0.5"/>
+    <circle cx="300" cy="300" r="180" stroke="#ff4d8d" stroke-width="0.4" stroke-dasharray="2 12" fill="none" opacity="0.3"/>
+  </svg>
+
+  <div class="hero-tag">CS Engineering · AI/ML · Backend · IoT</div>
+  <h1 class="hero-name">
+    <span class="line1">NIRANJANA</span>
+    <span class="line2">Gopinath</span>
+  </h1>
+  <p class="hero-subtitle">
+    Building intelligent systems at the intersection of machine learning, backend engineering &amp; real-world impact.<br>
+    <span id="status-text"></span><span class="typewriter"></span>
+  </p>
+  <div class="hero-cta">
+    <a href="#projects" class="btn btn-primary">✿ View Projects</a>
+    <a href="#contact" class="btn btn-outline">Get In Touch</a>
+  </div>
+  <div class="hero-scroll">
+    <span class="scroll-petal">✿</span>
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-content reveal">
+    <div class="section-label">About</div>
+    <h2 class="section-title">Third-year.<br><em>Problem Solver.</em><br>Builder.</h2>
+    <p class="about-text">I'm a Computer Science student at Amrita Vishwa Vidyapeetham, Coimbatore, exploring AI/ML, backend systems, and IoT. I love building things that have real-world utility — from AIOps platforms to soil health predictors.</p>
+    <p class="about-text">Maintaining a CGPA of 8.50 while actively competing in hackathons and building production-grade projects that matter.</p>
+    <div class="terminal">
+      <div class="terminal-bar"><div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div></div>
+      <span class="t-line"><span class="prompt">$ </span>whoami</span>
+      <span class="t-line dim">niranjana_gopinath · Tamil Nadu, IN</span>
+      <span class="t-line"><span class="prompt">$ </span>cat status.txt</span>
+      <span class="t-line dim">→ Open to internships &amp; research roles</span>
+      <span class="t-line dim">→ Available for collaboration</span>
+      <span class="t-line dim">→ Currently: building impactful ML systems</span>
+      <span class="t-line"><span class="prompt">$ </span><span style="color:var(--pink)">_</span></span>
+    </div>
+    <div class="about-stats">
+      <div class="stat-box"><span class="stat-num">8.5</span><span class="stat-label">CGPA</span></div>
+      <div class="stat-box"><span class="stat-num">3+</span><span class="stat-label">Projects</span></div>
+      <div class="stat-box"><span class="stat-num">2nd</span><span class="stat-label">Hackathon</span></div>
+    </div>
+  </div>
+  <div class="about-visual reveal">
+    <div class="avatar-wrap">
+      <svg class="avatar-circuit" viewBox="0 0 300 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g stroke="#ff4d8d" stroke-width="0.7">
+          <line x1="0" y1="90" x2="80" y2="90"/><line x1="80" y1="90" x2="100" y2="70"/>
+          <line x1="300" y1="150" x2="220" y2="150"/><line x1="220" y1="150" x2="200" y2="130"/>
+          <line x1="0" y1="270" x2="70" y2="270"/><line x1="70" y1="270" x2="90" y2="290"/>
+          <line x1="300" y1="240" x2="230" y2="240"/><line x1="230" y1="240" x2="210" y2="260"/>
+          <rect x="95" y="60" width="20" height="12" rx="2"/>
+          <rect x="195" y="120" width="20" height="12" rx="2"/>
+          <circle cx="85" cy="285" r="6"/><circle cx="205" cy="255" r="6"/>
+        </g>
+        <g stroke="#ff85b3" stroke-width="0.8" fill="none" opacity="0.6">
+          <ellipse cx="50" cy="50" rx="6" ry="14" transform="rotate(0 50 50)"/>
+          <ellipse cx="50" cy="50" rx="6" ry="14" transform="rotate(60 50 50)"/>
+          <ellipse cx="50" cy="50" rx="6" ry="14" transform="rotate(120 50 50)"/>
+          <circle cx="50" cy="50" r="4"/>
+          <ellipse cx="250" cy="310" rx="5" ry="12" transform="rotate(0 250 310)"/>
+          <ellipse cx="250" cy="310" rx="5" ry="12" transform="rotate(60 250 310)"/>
+          <ellipse cx="250" cy="310" rx="5" ry="12" transform="rotate(120 250 310)"/>
+          <circle cx="250" cy="310" r="3.5"/>
+          <ellipse cx="250" cy="70" rx="4" ry="10" transform="rotate(30 250 70)"/>
+          <ellipse cx="250" cy="70" rx="4" ry="10" transform="rotate(90 250 70)"/>
+          <ellipse cx="250" cy="70" rx="4" ry="10" transform="rotate(150 250 70)"/>
+          <circle cx="250" cy="70" r="3"/>
+        </g>
+      </svg>
+      <div class="avatar-monogram">NG</div>
+      <div class="avatar-tag">// niranjana.gopinath</div>
+    </div>
+    <div class="float-chip chip-1">AI / ML</div>
+    <div class="float-chip chip-2">Backend Dev</div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="skills-header reveal">
+    <div class="section-label">Technical Skills</div>
+    <h2 class="section-title">My <em>Arsenal</em></h2>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card reveal">
+      <span class="skill-flower">🌸</span>
+      <div class="skill-cat">Languages</div>
+      <div class="skill-name">Programming</div>
+      <div class="skill-tags">
+        <span class="tag">Python</span><span class="tag">C++</span><span class="tag">C</span>
+        <span class="tag">Java</span><span class="tag">MySQL</span><span class="tag">Haskell</span>
+      </div>
+      <div class="skill-level"><div class="skill-level-fill" data-width="88%"></div></div>
+    </div>
+    <div class="skill-card reveal">
+      <span class="skill-flower">🌺</span>
+      <div class="skill-cat">Frameworks</div>
+      <div class="skill-name">ML / Backend</div>
+      <div class="skill-tags">
+        <span class="tag">TensorFlow</span><span class="tag">FastAPI</span><span class="tag">Scikit-Learn</span>
+        <span class="tag">NumPy</span><span class="tag">Pandas</span><span class="tag">ReactJS</span><span class="tag">spaCy</span>
+      </div>
+      <div class="skill-level"><div class="skill-level-fill" data-width="82%"></div></div>
+    </div>
+    <div class="skill-card reveal">
+      <span class="skill-flower">🌷</span>
+      <div class="skill-cat">Systems &amp; Web</div>
+      <div class="skill-name">Infra &amp; Tools</div>
+      <div class="skill-tags">
+        <span class="tag">Linux</span><span class="tag">PostgreSQL</span><span class="tag">SQLite</span>
+        <span class="tag">REST APIs</span><span class="tag">HTML/CSS</span><span class="tag">Chart.js</span>
+      </div>
+      <div class="skill-level"><div class="skill-level-fill" data-width="76%"></div></div>
+    </div>
+    <div class="skill-card reveal">
+      <span class="skill-flower">🌹</span>
+      <div class="skill-cat">Concepts</div>
+      <div class="skill-name">CS Foundations</div>
+      <div class="skill-tags">
+        <span class="tag">DSA</span><span class="tag">OOP</span><span class="tag">DBMS</span>
+        <span class="tag">OS</span><span class="tag">NLP</span><span class="tag">AIOps</span>
+      </div>
+      <div class="skill-level"><div class="skill-level-fill" data-width="85%"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="projects-header reveal">
+    <div class="section-label">Projects</div>
+    <h2 class="section-title">Things I've <em>Built</em></h2>
+  </div>
+  <div class="projects-grid">
+    <div class="project-card reveal">
+      <div class="project-header">
+        <div class="project-num">01</div>
+        <div class="project-icon-wrap">📄</div>
+        <h3 class="project-title">Intelligent Document Processing &amp; Analysis System</h3>
+      </div>
+      <div class="project-body">
+        <p class="project-desc">Automated document processing pipeline using NLP for classification and entity extraction. REST APIs for upload, text extraction &amp; full-text search, integrated with Hugging Face and spaCy models.</p>
+        <div class="project-stack">
+          <span class="stack-tag">FastAPI</span><span class="stack-tag">PostgreSQL</span>
+          <span class="stack-tag">NLP</span><span class="stack-tag">Hugging Face</span><span class="stack-tag">spaCy</span>
+        </div>
+      </div>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-header">
+        <div class="project-num">02</div>
+        <div class="project-icon-wrap">📡</div>
+        <h3 class="project-title">Real-Time AIOps Monitoring System</h3>
+      </div>
+      <div class="project-body">
+        <p class="project-desc">Live system monitoring platform collecting and visualizing CPU &amp; memory metrics with an interactive dashboard. Integrated an Isolation Forest model for automatic anomaly detection.</p>
+        <div class="project-stack">
+          <span class="stack-tag">Python</span><span class="stack-tag">FastAPI</span>
+          <span class="stack-tag">SQLite</span><span class="stack-tag">Isolation Forest</span><span class="stack-tag">Chart.js</span>
+        </div>
+      </div>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-header">
+        <div class="project-num">03</div>
+        <div class="project-icon-wrap">🌱</div>
+        <h3 class="project-title">Soil Health &amp; Crop Risk Prediction System</h3>
+      </div>
+      <div class="project-body">
+        <p class="project-desc">ML forecasting tool predicting soil health, crop disease, and pest risk levels using Random Forest models trained on temperature &amp; moisture API data, with a full Tkinter GUI.</p>
+        <div class="project-stack">
+          <span class="stack-tag">Python</span><span class="stack-tag">Scikit-Learn</span>
+          <span class="stack-tag">Random Forest</span><span class="stack-tag">Tkinter</span><span class="stack-tag">REST APIs</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENT -->
+<section id="achievement">
+  <div class="achievement-inner reveal">
+    <svg class="ach-floral-bg" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="#ff4d8d" stroke-width="0.8">
+        <ellipse cx="200" cy="100" rx="30" ry="80" transform="rotate(0 200 200)"/>
+        <ellipse cx="200" cy="100" rx="30" ry="80" transform="rotate(45 200 200)"/>
+        <ellipse cx="200" cy="100" rx="30" ry="80" transform="rotate(90 200 200)"/>
+        <ellipse cx="200" cy="100" rx="30" ry="80" transform="rotate(135 200 200)"/>
+        <ellipse cx="200" cy="100" rx="30" ry="80" transform="rotate(180 200 200)"/>
+        <ellipse cx="200" cy="100" rx="30" ry="80" transform="rotate(225 200 200)"/>
+        <ellipse cx="200" cy="100" rx="30" ry="80" transform="rotate(270 200 200)"/>
+        <ellipse cx="200" cy="100" rx="30" ry="80" transform="rotate(315 200 200)"/>
+        <circle cx="200" cy="200" r="35"/><circle cx="200" cy="200" r="20"/>
+        <circle cx="200" cy="200" r="8" fill="#ff4d8d"/>
+      </g>
+    </svg>
+    <div>
+      <div class="achievement-label">Featured Achievement · 2025</div>
+      <h2 class="achievement-title"><em>2nd Place</em> — ICSRF<br>SocioHack 2025</h2>
+      <p class="achievement-desc">Selected among Top 16 finalists nationwide. Secured 1st place in the Rural Healthcare theme with Team Arogya, designing a technology-driven solution for sustainable healthcare access. Achieved overall 2nd place across business, technology, and sustainability tracks at Amrita Vishwa Vidyapeetham, Amritapuri.</p>
+    </div>
+    <div class="achievement-badges">
+      <div class="ach-badge"><span class="ach-badge-num">16</span><div class="ach-badge-label">Top Finalists</div></div>
+      <div class="ach-badge"><span class="ach-badge-num">1st</span><div class="ach-badge-label">Healthcare Theme</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <svg class="contact-floral" viewBox="0 0 700 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g stroke="#ff4d8d" stroke-width="0.6">
+      <ellipse cx="350" cy="150" rx="40" ry="120" transform="rotate(0 350 250)"/>
+      <ellipse cx="350" cy="150" rx="40" ry="120" transform="rotate(36 350 250)"/>
+      <ellipse cx="350" cy="150" rx="40" ry="120" transform="rotate(72 350 250)"/>
+      <ellipse cx="350" cy="150" rx="40" ry="120" transform="rotate(108 350 250)"/>
+      <ellipse cx="350" cy="150" rx="40" ry="120" transform="rotate(144 350 250)"/>
+      <ellipse cx="350" cy="150" rx="40" ry="120" transform="rotate(180 350 250)"/>
+      <ellipse cx="350" cy="150" rx="40" ry="120" transform="rotate(216 350 250)"/>
+      <ellipse cx="350" cy="150" rx="40" ry="120" transform="rotate(252 350 250)"/>
+      <ellipse cx="350" cy="150" rx="40" ry="120" transform="rotate(288 350 250)"/>
+      <ellipse cx="350" cy="150" rx="40" ry="120" transform="rotate(324 350 250)"/>
+      <circle cx="350" cy="250" r="50"/><circle cx="350" cy="250" r="30"/>
+      <circle cx="350" cy="250" r="10" fill="#ff4d8d" opacity="0.4"/>
+    </g>
+  </svg>
+  <div class="reveal">
+    <div class="section-label" style="justify-content:center">Contact</div>
+    <h2 class="contact-heading">Let's <span>Connect</span></h2>
+    <p class="contact-sub">Open to internships, research collaborations, and interesting projects. Drop a message — I respond fast.</p>
+    <div class="contact-links">
+      <a href="mailto:niranjanakg22@gmail.com" class="contact-link">
+        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        niranjanakg22@gmail.com
+      </a>
+      <a href="https://linkedin.com/in/niranjana-karrath-gopinath-b1704a28b/" target="_blank" class="contact-link">
+        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+      <a href="https://github.com/niranjanagopinath" target="_blank" class="contact-link">
+        <svg viewBox="0 0 24 24"><path d="M12 .297c-6-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+        GitHub
+      </a>
+      <a href="tel:+917397104659" class="contact-link">
+        <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+        +91 73971 04659
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2025 Niranjana Gopinath</span>
+  <span style="color:var(--pink)">✿ built with care &amp; code</span>
+</footer>
+
+<script>
+const cursor=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx-5+'px';cursor.style.top=my-5+'px';});
+setInterval(()=>{rx+=(mx-rx)*0.14;ry+=(my-ry)*0.14;ring.style.left=rx-17+'px';ring.style.top=ry-17+'px';},16);
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cursor.style.transform='scale(3) rotate(45deg)';ring.style.transform='scale(1.6)';ring.style.borderColor='rgba(255,133,179,0.7)';});
+  el.addEventListener('mouseleave',()=>{cursor.style.transform='rotate(45deg)';ring.style.transform='scale(1)';ring.style.borderColor='rgba(255,77,141,0.35)';});
+});
+
+const phrases=['Currently: Building ML systems.','Status: Open to internships.','Loves: clean code + floral aesthetics.','Passion: Impactful engineering.'];
+let pi=0,ci=0,del=false;
+const statusEl=document.getElementById('status-text');
+function type(){
+  const phrase=phrases[pi];
+  if(!del){statusEl.textContent=phrase.slice(0,ci+1);ci++;if(ci===phrase.length){del=true;setTimeout(type,2200);return;}}
+  else{statusEl.textContent=phrase.slice(0,ci-1);ci--;if(ci===0){del=false;pi=(pi+1)%phrases.length;}}
+  setTimeout(type,del?38:72);
+}
+setTimeout(type,1800);
+
+const reveals=document.querySelectorAll('.reveal');
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const idx=Array.from(e.target.parentElement.children).indexOf(e.target);
+      setTimeout(()=>e.target.classList.add('visible'),idx*90);
+      e.target.querySelectorAll('.skill-level-fill').forEach(b=>b.style.width=b.dataset.width);
+      obs.unobserve(e.target);
+    }
+  });
+},{threshold:0.1});
+reveals.forEach(el=>obs.observe(el));
+
+const sections=document.querySelectorAll('section[id]'),navLinks=document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll',()=>{
+  let cur='';sections.forEach(s=>{if(window.scrollY>=s.offsetTop-130)cur=s.id;});
+  navLinks.forEach(a=>{a.style.color=a.getAttribute('href')==='#'+cur?'var(--pink2)':'';});
+});
+
+// Falling petals
+const petalChars=['✿','✾','❀','❁','✽'];
+for(let i=0;i<18;i++){
+  const p=document.createElement('div');p.className='petal-particle';
+  p.textContent=petalChars[Math.floor(Math.random()*petalChars.length)];
+  const left=Math.random()*100,dur=8+Math.random()*14,delay=-Math.random()*20,size=0.5+Math.random()*0.7;
+  p.style.cssText=`left:${left}vw;font-size:${size}rem;animation-duration:${dur}s;animation-delay:${delay}s;color:rgba(255,77,141,${0.15+Math.random()*0.25})`;
+  document.body.appendChild(p);
+}
+
+// Canvas particles
+const canvas=document.createElement('canvas');
+canvas.style.cssText='position:fixed;inset:0;pointer-events:none;z-index:0;';
+document.body.appendChild(canvas);
+const ctx=canvas.getContext('2d');
+function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
+resize();window.addEventListener('resize',resize);
+const pts=Array.from({length:55},()=>({
+  x:Math.random()*window.innerWidth,y:Math.random()*window.innerHeight,
+  vx:(Math.random()-0.5)*0.25,vy:(Math.random()-0.5)*0.25,
+  r:Math.random()*1.2+0.3,a:Math.random()*0.5+0.1,petal:Math.random()>0.65
+}));
+function draw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  pts.forEach(p=>{
+    p.x+=p.vx;p.y+=p.vy;
+    if(p.x<0)p.x=canvas.width;if(p.x>canvas.width)p.x=0;
+    if(p.y<0)p.y=canvas.height;if(p.y>canvas.height)p.y=0;
+    if(p.petal){
+      ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.vx*20);
+      ctx.font=`${p.r*6}px serif`;ctx.fillStyle=`rgba(255,77,141,${p.a*0.3})`;
+      ctx.fillText('✿',0,0);ctx.restore();
+    } else {
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(255,77,141,${p.a*0.4})`;ctx.fill();
+    }
+  });
+  for(let i=0;i<pts.length;i++){
+    for(let j=i+1;j<pts.length;j++){
+      const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,dist=Math.sqrt(dx*dx+dy*dy);
+      if(dist<110){
+        ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);
+        ctx.strokeStyle=`rgba(255,77,141,${(1-dist/110)*0.07})`;ctx.lineWidth=0.4;ctx.stroke();
+      }
+    }
+  }
+  requestAnimationFrame(draw);
+}
+draw();
+</script>
+</body>
+</html>
